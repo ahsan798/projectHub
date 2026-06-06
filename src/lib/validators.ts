@@ -58,8 +58,8 @@ export const projectSchema = z.object({
     .string()
     .min(10, 'Description must be at least 10 characters')
     .max(500, 'Description is too long'),
-  status: z.enum(['active', 'on-hold', 'completed'], {
-    errorMap: () => ({ message: 'Please select a valid status' }),
+  status: z.enum(['active', 'on-hold', 'completed']).refine(Boolean, {
+    message: 'Please select a valid status',
   }),
 });
 
@@ -76,12 +76,8 @@ export const taskSchema = z.object({
     .string()
     .min(5, 'Description must be at least 5 characters')
     .max(1000, 'Description is too long'),
-  priority: z.enum(['low', 'medium', 'high'], {
-    errorMap: () => ({ message: 'Please select a priority' }),
-  }),
-  status: z.enum(['todo', 'in-progress', 'in-review', 'done'], {
-    errorMap: () => ({ message: 'Please select a status' }),
-  }),
+  priority: z.enum(['low', 'medium', 'high']),
+  status: z.enum(['todo', 'in-progress', 'in-review', 'done']),
   dueDate: z
     .string()
     .min(1, 'Due date is required')

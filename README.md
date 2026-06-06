@@ -1,36 +1,91 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ProjectHub — Project & Task Management Dashboard
 
-## Getting Started
+A production-ready, full-stack Next.js application built for managing projects, tracking tasks via a drag-and-drop Kanban board, and visualizing team productivity.
 
-First, run the development server:
+## 🚀 Tech Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
+- **Language**: [TypeScript](https://www.typescriptlang.org/) (Strict Mode)
+- **State Management**: [Redux Toolkit](https://redux-toolkit.js.org/)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **Form Handling**: [React Hook Form](https://react-hook-form.com/)
+- **Validation**: [Zod](https://zod.dev/)
+- **Charts**: [Recharts](https://recharts.org/)
+- **Drag & Drop**: [@hello-pangea/dnd](https://github.com/hello-pangea/dnd)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **HTTP Client**: [Axios](https://axios-http.com/) (configured with mock interceptors)
+
+## ✨ Features & Bonus Implementations
+
+- **Modern UI & Animations**: Smooth page transitions, count-up stats, modal animations, and staggered list renders.
+- **Dark/Light Mode**: Full CSS-variable driven theme system that respects user preference and persists to `localStorage`.
+- **Drag & Drop Kanban**: Interactive task board with optimistic UI updates via Redux.
+- **Role-Based Access**: Mock `admin` vs `member` roles. Admins can delete any project/task; members are restricted to their own assignments.
+- **Comprehensive Validation**: Client-side validation for all forms (Auth, Projects, Tasks) using Zod schemas.
+- **Error Boundaries & Loading States**: Skeleton loaders for data fetching simulation and global/route-level error catchers.
+- **Responsive Design**: Mobile-first approach with a collapsible sidebar and fluid grid layouts.
+- **Mock API Layer**: Axios interceptors simulate network latency (300-800ms) and handle JWT token injection/validation, making it trivial to swap in a real backend later.
+
+## 📁 Project Structure
+
+```
+.
+├── app/
+│   ├── (auth)/             # Route group: Login, Register, Forgot Password
+│   ├── (dashboard)/        # Route group: Dashboard, Projects, Tasks
+│   ├── globals.css         # Global styles & Tailwind tokens
+│   ├── layout.tsx          # Root layout (Redux & Theme Providers)
+│   └── page.tsx            # Redirects to /dashboard
+├── src/
+│   ├── components/
+│   │   ├── dashboard/      # Stats cards, charts, recent activity
+│   │   ├── layout/         # Sidebar, Topbar, ThemeToggle
+│   │   ├── projects/       # Project cards, forms
+│   │   ├── tasks/          # Task cards, Kanban board, forms
+│   │   └── ui/             # Reusable primitives (Button, Input, Modal, etc.)
+│   ├── lib/
+│   │   ├── axios.ts        # Axios instance + mock interceptors
+│   │   ├── mockData.ts     # Seed data
+│   │   └── validators.ts   # Zod schemas
+│   ├── store/              # Redux slices (auth, projects, tasks)
+│   ├── types/              # TypeScript interfaces
+│   └── utils/              # Helper functions (date formatting, class merging)
+└── middleware.ts           # Next.js Edge Middleware for route protection
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Setup Instructions
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Clone the repository** (if applicable):
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+   ```bash
+   git clone <repo-url>
+   cd project-management
+   ```
 
-## Learn More
+2. **Install dependencies**:
 
-To learn more about Next.js, take a look at the following resources:
+   ```bash
+   npm install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. **Run the development server**:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```bash
+   npm run dev
+   ```
 
-## Deploy on Vercel
+5. **Open the app**:
+   Navigate to [http://localhost:3000] in your browser.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🔐 Demo Credentials
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project uses an in-memory mock backend with preconfigured demo accounts.
+
+| Role   | Email                 | Password |
+|--------|-----------------------|----------|
+| Admin  | test@test.com         | password |
+| Admin  | alice@projecthub.com  | password |
+| Member | sara@projecthub.com   | password |
+| Member | bob@projecthub.com    | password |
+
+> Note: Data is stored in memory and resets when the application is refreshed or restarted.
